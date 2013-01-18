@@ -10,4 +10,9 @@ import com.yammer.dropwizard.config.Configuration;
  * To change this template use File | Settings | File Templates.
  */
 public class TwitterFluConfiguration extends Configuration {
+    private String solrURL;
+
+    public String getSolrURL() {
+        return solrURL;
+    }
 }

@@ -1,10 +1,13 @@
 package com.sample.twitter.flu;
 
+import com.sample.twitter.flu.dao.SolrDao;
+import com.sample.twitter.flu.resource.TwitterAnalysisResource;
 import com.yammer.dropwizard.Service;
 import com.yammer.dropwizard.assets.AssetsBundle;
 import com.yammer.dropwizard.config.Bootstrap;
 import com.yammer.dropwizard.config.Environment;
-import com.yammer.dropwizard.migrations.MigrationsBundle;
+import org.apache.solr.client.solrj.impl.HttpSolrServer;
+
 
 /**
  * Created with IntelliJ IDEA.
@@ -28,9 +31,8 @@ public class TwitterFluService extends Service<TwitterFluConfiguration> {
     @Override
     public void run(TwitterFluConfiguration configuration,
                            Environment environment) {
-//        final String template = configuration.getTemplate();
-//        environment.addResource(new SampleDropwizardResource(template));
-//        environment.addHealthCheck(new SampleDropwizardHealthCheck(template));
+
+        environment.addResource(new TwitterAnalysisResource(new SolrDao(new HttpSolrServer(configuration.getSolrURL()))));
     }
 
 
